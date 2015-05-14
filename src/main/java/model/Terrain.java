@@ -49,8 +49,6 @@ public class Terrain {
         }
     }
     
-    public void connectTerrain()
-    
     public TerrainPoint getPoint(int x, int y){
         return pointLists.get(x).get(y);
     }
