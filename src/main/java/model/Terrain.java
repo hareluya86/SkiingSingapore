@@ -30,23 +30,6 @@ public class Terrain {
         
         this.setWidth(width);
         this.setHeight(height);
-        
-        //connect them together
-        for(int x=0; x<this.getWidth(); x++){
-            for(int y=0; y<this.getHeight(); y++){
-                TerrainPoint point = this.getPoint(x, y);
-                //set links to all 4 directions
-                //north
-                if(y-1 > 0) point.setNorth(this.getPoint(x, y-1));
-                //south
-                if(y+1 < this.getHeight()) point.setNorth(this.getPoint(x, y+1));
-                //east
-                if(x-1 > 0) point.setEast(this.getPoint(x-1, y));
-                //south
-                if(x+1 < this.getWidth()) point.setWest(this.getPoint(x+1, y));
-                
-            }
-        }
     }
     
     public TerrainPoint getPoint(int x, int y){
