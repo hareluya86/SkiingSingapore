@@ -47,11 +47,11 @@ public class TerrainBuilder {
                 TerrainPoint point = newTerrain.getPoint(x, y);
                 //set links to all 4 directions
                 //north
-                if(y-1 > 0) point.setNorth(newTerrain.getPoint(x, y-1));
+                if(y-1 >= 0) point.setNorth(newTerrain.getPoint(x, y-1));
                 //south
                 if(y+1 < newTerrain.getHeight()) point.setNorth(newTerrain.getPoint(x, y+1));
                 //east
-                if(x-1 > 0) point.setEast(newTerrain.getPoint(x-1, y));
+                if(x-1 >= 0) point.setEast(newTerrain.getPoint(x-1, y));
                 //south
                 if(x+1 < newTerrain.getWidth()) point.setWest(newTerrain.getPoint(x+1, y));
                 

@@ -61,5 +61,13 @@ public class Terrain {
         this.height = height;
     }
     
-    
+    public List<TerrainPoint> getAllPoints(){
+        List<TerrainPoint> allPoints = new ArrayList<TerrainPoint>();
+        
+        for(List<TerrainPoint> rows : pointLists){
+            allPoints.addAll(rows);
+        }
+        
+        return allPoints;
+    }
 }

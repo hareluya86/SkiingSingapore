@@ -6,9 +6,9 @@
 package utilities;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-import model.TerrainPoint;
+import model.Terrain;
+import model.TerrainPath;
+import utilities.impl.DFSSearch;
 
 /**
  *
@@ -16,13 +16,32 @@ import model.TerrainPoint;
  */
 public abstract class TreeSearch {
     
-    private Map<List<TerrainPoint>> allPaths;
+    public static enum TYPE{
+        DFS,
+        
+    }
     
-    private Stack<TerrainPoint> searchPath;
-    
-    private 
+    protected Terrain terrain;
     
     public abstract void searchAll();
     
-    public abstract void 
+    public static TreeSearch getTreeSearch(TYPE type){
+        switch(type){
+            case DFS    : return new DFSSearch();
+            default     : break;
+        }
+        
+        return null;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+    
+    public abstract List<TerrainPath> getAllPath();
+    
 }

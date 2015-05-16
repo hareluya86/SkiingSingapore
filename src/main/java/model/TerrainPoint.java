@@ -5,22 +5,28 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  *
  * @author LeeKiatHaw
  */
-public class TerrainPoint {
+public class TerrainPoint implements Comparable<TerrainPoint>, Iterable<TerrainPoint> {
     
     private int X;
     private int Y;
     
     private int height;
     
-    private TerrainPoint north;
-    private TerrainPoint south;
-    private TerrainPoint east;
-    private TerrainPoint west;
-
+    private List<TerrainPoint> neighbours = new ArrayList<TerrainPoint>();
+    
+    //private TerrainPoint north;
+    //private TerrainPoint south;
+    //private TerrainPoint east;
+    //private TerrainPoint west;
+    
     public int getX() {
         return X;
     }
@@ -46,36 +52,107 @@ public class TerrainPoint {
     }
 
     public TerrainPoint getNorth() {
-        return north;
+        for(TerrainPoint neighbour : neighbours){
+            if(neighbour.getX() == this.getX() && 
+                    neighbour.getY() == this.getY() - 1)
+                return neighbour;
+        }
+        return null;
     }
 
     public void setNorth(TerrainPoint north) {
-        this.north = north;
+        this.neighbours.add(north);
     }
 
     public TerrainPoint getSouth() {
-        return south;
+        for(TerrainPoint neighbour : neighbours){
+            if(neighbour.getX() == this.getX() && 
+                    neighbour.getY() == this.getY() + 1)
+                return neighbour;
+        }
+        return null;
     }
 
     public void setSouth(TerrainPoint south) {
-        this.south = south;
+        this.neighbours.add(south);
     }
 
     public TerrainPoint getEast() {
-        return east;
+        for(TerrainPoint neighbour : neighbours){
+            if(neighbour.getX() == this.getX() + 1 && 
+                    neighbour.getY() == this.getY())
+                return neighbour;
+        }
+        return null;
     }
 
     public void setEast(TerrainPoint east) {
-        this.east = east;
+        this.neighbours.add(east);
     }
 
     public TerrainPoint getWest() {
-        return west;
+        for(TerrainPoint neighbour : neighbours){
+            if(neighbour.getX() == this.getX() - 1 && 
+                    neighbour.getY() == this.getY())
+                return neighbour;
+        }
+        return null;
     }
 
     public void setWest(TerrainPoint west) {
-        this.west = west;
+        this.neighbours.add(west);
     }
+    
+    public int size(){
+        
+        return this.neighbours.size();
+    }
+
+    @Override
+    public int compareTo(TerrainPoint tp) {
+        return this.height - tp.getHeight();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TerrainPoint other = (TerrainPoint) obj;
+        if (this.X != other.X) {
+            return false;
+        }
+        if (this.Y != other.Y) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + this.X;
+        hash = 23 * hash + this.Y;
+        hash = 23 * hash + this.height;
+        return hash;
+    }
+
+    @Override
+    public Iterator<TerrainPoint> iterator() {
+        //TerrainPointIterator i = new TerrainPointIterator();
+        //i.setThisPoint(this);
+        //return i;
+        return this.neighbours.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return "TerrainPoint{" + "X=" + X + ", Y=" + Y + ", height=" + height + '}';
+    }
+    
     
     
 }
