@@ -36,10 +36,16 @@ public class Main {
             case 0  :   URL url = new URL("http://s3-ap-southeast-1.amazonaws.com/geeks.redmart.com/coding-problems/map.txt");
                         newTerrain = builder.buildTerrain(new BufferedReader(new InputStreamReader(url.openStream())));
                         break;
-            case 1  :   file = new File("/Users/LeeKiatHaw/Google Drive/SkiingSingapore/test1.txt");
+            case 1  :   file = new File("test1.txt");
                         newTerrain = builder.buildTerrain(new BufferedReader(new FileReader(file)));
                         break;
-            case 2  :   file = new File("/Users/LeeKiatHaw/Google Drive/SkiingSingapore/test2.txt");
+            case 2  :   file = new File("test2.txt");
+                        newTerrain = builder.buildTerrain(new BufferedReader(new FileReader(file)));
+                        break;
+            case 3  :   file = new File("test3.txt");
+                        newTerrain = builder.buildTerrain(new BufferedReader(new FileReader(file)));
+                        break;
+            case 4  :   file = new File("test4.txt");
                         newTerrain = builder.buildTerrain(new BufferedReader(new FileReader(file)));
                         break;
             default :   throw new RuntimeException("Option "+source+" for datasource is not recognized.");
@@ -47,8 +53,8 @@ public class Main {
         
         //do some random checks
         for(int i=0;i<numTestCases;i++){
-            int x = (int) (Math.random()*newTerrain.getHeight());
-            int y = (int) (Math.random()*newTerrain.getWidth());
+            int x = (int) (Math.random()*newTerrain.getWidth());
+            int y = (int) (Math.random()*newTerrain.getHeight());
             
             System.out.println(newTerrain.getPoint(x, y));
             
@@ -65,7 +71,7 @@ public class Main {
         
         List<TerrainPath> allPaths = dfs.getAllPath();
         Collections.sort(allPaths);
-        if(allPaths != null)
+        if(allPaths != null && !allPaths.isEmpty())
             System.out.println(allPaths.get(0));
     }
 }

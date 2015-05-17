@@ -14,11 +14,16 @@ import java.util.Stack;
  */
 public class TerrainPath implements Comparable<TerrainPath>, Cloneable, Iterable<TerrainPoint>{
     
-    private Stack<TerrainPoint> path = new Stack();
+    protected Stack<TerrainPoint> path = new Stack<TerrainPoint>();
     
-    private int length = 0;
+    protected int length = 0;
     
-    private int drop = 0;
+    protected int drop = 0;
+    
+    public TerrainPath(){
+        
+    }
+    
     
     public void addPoint(TerrainPoint newPoint){
         path.push(newPoint);
@@ -40,8 +45,8 @@ public class TerrainPath implements Comparable<TerrainPath>, Cloneable, Iterable
 
     @Override
     public int compareTo(TerrainPath tp) {
-        
-        return tp.getLength() - this.length + tp.getDrop() - this.drop;
+
+        return (tp.getLength() != this.length) ? this.length - tp.getLength() : this.drop - tp.getDrop();
     }
 
     public int getLength() {
@@ -77,10 +82,10 @@ public class TerrainPath implements Comparable<TerrainPath>, Cloneable, Iterable
     public String toString() {
         String pathString = "";
         for(TerrainPoint point : path){
-            pathString += point.getHeight()+"-";
+            pathString += "("+point.getX()+","+point.getY()+","+point.getHeight()+")-";
         }
                 
-        return "TerrainPath{" + "path=" + path + ", length=" + length + ", drop=" + drop + '}';
+        return "TerrainPath{" + "path=" + pathString + ", length=" + length + ", drop=" + drop + '}';
     }
     
     
